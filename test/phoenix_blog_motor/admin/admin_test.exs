@@ -6,9 +6,17 @@ defmodule PhoenixBlogMotor.AdminTest do
   describe "users" do
     alias PhoenixBlogMotor.Admin.User
 
-    @valid_attrs %{}
-    @update_attrs %{}
-    @invalid_attrs %{}
+    @valid_attrs %{
+      email: "test@test.com",
+      name: "tester mctesterson",
+      password: "test"
+    }
+    @update_attrs %{
+      email: "test2@test.com"
+    }
+    @invalid_attrs %{
+      email: ""
+    }
 
     def user_fixture(attrs \\ %{}) do
       {:ok, user} =
@@ -30,7 +38,7 @@ defmodule PhoenixBlogMotor.AdminTest do
     end
 
     test "create_user/1 with valid data creates a user" do
-      assert {:ok, %User{} = user} = Admin.create_user(@valid_attrs)
+      assert {:ok, %User{}} = Admin.create_user(@valid_attrs)
     end
 
     test "create_user/1 with invalid data returns error changeset" do
@@ -50,7 +58,7 @@ defmodule PhoenixBlogMotor.AdminTest do
     end
 
     test "delete_user/1 deletes the user" do
-      user = user_fixture()
+      user = user_fixture(@valid_attrs)
       assert {:ok, %User{}} = Admin.delete_user(user)
       assert_raise Ecto.NoResultsError, fn -> Admin.get_user!(user.id) end
     end
