@@ -9,6 +9,11 @@ use Mix.Config
 config :phoenix_blog_motor,
   ecto_repos: [PhoenixBlogMotor.Repo]
 
+# Configure Guradian
+config :phoenix_blog_motor, PhoenixBlogMotorWeb.Guardian,
+  issuer: "phoenix_blog_motor",
+  secret_key: "ge1P67O2lwWoxYmGhK7vUh9jB2lFilr8JSWkhRlRw5x9Zo60IhQaI+KjYqrWj/j5"
+
 # Configures the endpoint
 config :phoenix_blog_motor, PhoenixBlogMotorWeb.Endpoint,
   url: [host: "localhost"],
