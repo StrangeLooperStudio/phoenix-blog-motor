@@ -41,7 +41,8 @@ defmodule PhoenixBlogMotor.Mixfile do
       {:cowboy, "~> 1.0"},
       {:guardian, "~> 1.0.1"},
       {:comeonin, "~> 4.0"},
-      {:argon2_elixir, "~> 1.2"}
+      {:argon2_elixir, "~> 1.2"},
+      {:ja_serializer, "~> 0.13.0"}
     ]
   end
 

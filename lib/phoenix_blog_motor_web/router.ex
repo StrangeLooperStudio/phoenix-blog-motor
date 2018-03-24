@@ -18,6 +18,6 @@ defmodule PhoenixBlogMotorWeb.Router do
   scope "/api", PhoenixBlogMotorWeb do
     pipe_through [:api, :api_auth]
     resources "/users", UserController
-    #resources "/session", SessionController, only: [:show, :delete], singleton: true
+    resources "/session", SessionController, only: [:show, :delete], singleton: true
   end
 end

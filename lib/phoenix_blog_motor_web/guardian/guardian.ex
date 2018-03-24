@@ -35,8 +35,7 @@ defmodule PhoenixBlogMotorWeb.Guardian do
     # Does password match the one stored in the database?
     case Comeonin.Argon2.checkpw(password, user.encrypted_password) do
       true ->
-        # Yes, create and return the token
-        PhoenixBlogMotorWeb.Guardian.encode_and_sign(user)
+        {:ok}
       _ ->
         # No, return an error
         {:error, :unauthorized}

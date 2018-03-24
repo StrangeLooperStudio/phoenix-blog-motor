@@ -17,4 +17,10 @@ defmodule PhoenixBlogMotorWeb.FallbackController do
     |> put_status(:not_found)
     |> render(PhoenixBlogMotorWeb.ErrorView, :"404")
   end
+
+  def call(conn, {:error, :unauthorized}) do
+    conn
+    |> put_status(:unauthorized)
+    |> render(PhoenixBlogMotorWeb.ErrorView, :"401")
+  end
 end

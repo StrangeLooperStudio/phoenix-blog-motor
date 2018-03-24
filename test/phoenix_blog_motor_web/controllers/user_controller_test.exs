@@ -3,7 +3,7 @@ defmodule PhoenixBlogMotorWeb.UserControllerTest do
 
   alias PhoenixBlogMotor.Admin
   alias PhoenixBlogMotor.Admin.User
-  import PhoenixBlogMotorWeb.Guardian
+  alias PhoenixBlogMotorWeb.Guardian
 
   @create_attrs %{
     email: "test@test.com",
@@ -24,7 +24,7 @@ defmodule PhoenixBlogMotorWeb.UserControllerTest do
 
   setup %{conn: conn} do
     user = fixture(:user)
-    {:ok, token, _} = encode_and_sign(user, %{}, token_type: :access)
+    {:ok, token, _} = Guardian.encode_and_sign(user, %{}, token_type: :access)
     conn = conn
     |> put_req_header("authorization", "bearer: " <> token)
     |> put_req_header("accept", "application/json")
