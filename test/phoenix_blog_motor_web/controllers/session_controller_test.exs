@@ -21,8 +21,10 @@ defmodule PhoenixBlogMotorWeb.SessionControllerTest do
   end
 
   setup %{conn: conn} do
-    conn
-    |> put_req_header("accept", "application/json")
+    conn = conn
+    |> put_req_header("accept", "application/vnd.api+json")
+    |> put_req_header("content-type", "application/vnd.api+json")
+    
     {:ok, conn: conn}
   end
 
@@ -73,7 +75,8 @@ defmodule PhoenixBlogMotorWeb.SessionControllerTest do
     {:ok, token, _} = Guardian.encode_and_sign(user, %{}, token_type: :access)
      conn = conn
       |> put_req_header("authorization", "bearer: " <> token)
-      |> put_req_header("accept", "application/json")
+      |> put_req_header("accept", "application/vnd.api+json")
+      |> put_req_header("content-type", "application/vnd.api+json")
 
      {:ok, conn: conn}
   end

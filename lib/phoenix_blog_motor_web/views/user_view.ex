@@ -2,15 +2,7 @@ defmodule PhoenixBlogMotorWeb.UserView do
   use PhoenixBlogMotorWeb, :view
   alias PhoenixBlogMotorWeb.UserView
 
-  def render("index.json", %{users: users}) do
-    %{data: render_many(users, UserView, "user.json")}
-  end
+  location "/api/users/:id"
 
-  def render("show.json", %{user: user}) do
-    %{data: render_one(user, UserView, "user.json")}
-  end
-
-  def render("user.json", %{user: user}) do
-    %{id: user.id}
-  end
+  attributes [:name, :email]
 end

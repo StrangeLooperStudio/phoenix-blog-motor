@@ -7,8 +7,7 @@ defmodule PhoenixBlogMotorWeb.UserController do
   action_fallback PhoenixBlogMotorWeb.FallbackController
 
   def index(conn, _params) do
-    users = Admin.list_users()
-    render(conn, "index.json", users: users)
+    render conn, "index.json-api", data: Admin.list_users()
   end
 
   def create(conn, %{"user" => user_params}) do
@@ -16,20 +15,20 @@ defmodule PhoenixBlogMotorWeb.UserController do
       conn
       |> put_status(:created)
       |> put_resp_header("location", user_path(conn, :show, user))
-      |> render("show.json", user: user)
+      |> render("show.json-api", data: user)
     end
   end
 
   def show(conn, %{"id" => id}) do
     user = Admin.get_user!(id)
-    render(conn, "show.json", user: user)
+    render(conn, "show.json-api", data: user)
   end
 
   def update(conn, %{"id" => id, "user" => user_params}) do
     user = Admin.get_user!(id)
 
     with {:ok, %User{} = user} <- Admin.update_user(user, user_params) do
-      render(conn, "show.json", user: user)
+      render(conn, "show.json-api", data: user)
     end
   end
 

@@ -2,21 +2,13 @@ defmodule PhoenixBlogMotorWeb.SessionView do
   use PhoenixBlogMotorWeb, :view
   alias PhoenixBlogMotorWeb.SessionView
 
-  def render("session.json-api", %{token: token, user: user}) do
-    %{
-      data: %{
-        id: 1,
-        type: "sessions",
-        attributes: %{
-          token: token
-        },
-        relationships: %{
-          user: %{
-            type: "users",
-            id: user.id
-          }
-        }
-      }
-    }
+  location "/api/session"
+
+  attributes [:token]
+
+  has_one :user, include: true, serializer: PhoenixBlogMotorWeb.UserView
+
+  def user(_token, conn) do
+    Guardian.Plug.current_resource(conn)
   end
 end

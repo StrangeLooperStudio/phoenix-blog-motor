@@ -12,12 +12,12 @@ defmodule PhoenixBlogMotorWeb.SessionController do
 
       conn = Guardian.Plug.sign_in(conn, PhoenixBlogMotorWeb.Guardian, user)
 
-      render conn, "session.json-api", %{ token: Guardian.Plug.current_token(conn), user: user }
+      render conn, "show.json-api", data: %{ token: Guardian.Plug.current_token(conn) }, user: user
     end
   end
 
   def show(conn, _params) do
-    render(conn, "session.json-api",  %{ token: Guardian.Plug.current_token(conn), user:  Guardian.Plug.current_resource(conn) })
+    render conn, "show.json-api",  data: %{ id: 1, token: Guardian.Plug.current_token(conn)}
   end
 
   def delete(conn, _params) do

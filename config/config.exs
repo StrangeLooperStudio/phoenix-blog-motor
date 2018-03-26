@@ -18,7 +18,7 @@ config :phoenix_blog_motor, PhoenixBlogMotorWeb.Guardian,
 config :phoenix_blog_motor, PhoenixBlogMotorWeb.Endpoint,
   url: [host: "localhost"],
   secret_key_base: "sRjeabLCvFfJglGAOnku+NIkarOH7LlVWlPFK8/fAF5pII0iPmSaD9/d/mCY4rl/",
-  render_errors: [view: PhoenixBlogMotorWeb.ErrorView, accepts: ~w(json)],
+  render_errors: [view: PhoenixBlogMotorWeb.ErrorView, accepts: ~w(json json-api)],
   pubsub: [name: PhoenixBlogMotor.PubSub,
            adapter: Phoenix.PubSub.PG2]
 
@@ -26,6 +26,13 @@ config :phoenix_blog_motor, PhoenixBlogMotorWeb.Endpoint,
 config :logger, :console,
   format: "$time $metadata[$level] $message\n",
   metadata: [:user_id]
+
+config :phoenix, :format_encoders,
+  "json-api": Poison
+
+config :mime, :types, %{
+  "application/vnd.api+json" => ["json-api"]
+}
 
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
