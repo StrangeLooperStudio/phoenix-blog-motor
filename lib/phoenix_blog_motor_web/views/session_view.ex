@@ -1,6 +1,5 @@
 defmodule PhoenixBlogMotorWeb.SessionView do
   use PhoenixBlogMotorWeb, :view
-  alias PhoenixBlogMotorWeb.SessionView
 
   location "/api/session"
 
