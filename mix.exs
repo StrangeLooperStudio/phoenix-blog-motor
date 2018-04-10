@@ -42,7 +42,9 @@ defmodule PhoenixBlogMotor.Mixfile do
       {:guardian, "~> 1.0.1"},
       {:comeonin, "~> 4.0"},
       {:argon2_elixir, "~> 1.2"},
-      {:ja_serializer, "~> 0.13.0"}
+      {:ja_serializer, "~> 0.13.0"},
+      {:ex_machina, "~> 2.2", only: :test},
+      {:faker, "~> 0.10", only: :test}
     ]
   end
 

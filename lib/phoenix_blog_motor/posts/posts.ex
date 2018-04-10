@@ -1,3 +1,5 @@
+import Ecto.Query, only: [from: 2]
+
 defmodule PhoenixBlogMotor.Posts do
   @moduledoc """
   The Posts context.
@@ -19,6 +21,20 @@ defmodule PhoenixBlogMotor.Posts do
   """
   def list_posts do
     Repo.all(Post)
+  end
+
+  @doc """
+  Returns the list of published posts.
+
+  ## Examples
+
+      iex> list_posts()
+      [%Post{}, ...]
+
+  """
+  def list_published_posts do
+    query = from p in Post, where: p.is_published == true
+    Repo.all(query)
   end
 
   @doc """
