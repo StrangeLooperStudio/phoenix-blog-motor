@@ -2,6 +2,7 @@ defmodule PhoenixBlogMotor.AdminTest do
   use PhoenixBlogMotor.DataCase
 
   alias PhoenixBlogMotor.Admin
+  import PhoenixBlogMotor.Factory
 
   describe "users" do
     alias PhoenixBlogMotor.Admin.User
@@ -18,13 +19,8 @@ defmodule PhoenixBlogMotor.AdminTest do
       email: ""
     }
 
-    def user_fixture(attrs \\ %{}) do
-      {:ok, user} =
-        attrs
-        |> Enum.into(@valid_attrs)
-        |> Admin.create_user()
-
-      user
+    def user_fixture() do
+      insert(:user)
     end
 
     test "list_users/0 returns all users" do
@@ -58,7 +54,7 @@ defmodule PhoenixBlogMotor.AdminTest do
     end
 
     test "delete_user/1 deletes the user" do
-      user = user_fixture(@valid_attrs)
+      user = user_fixture()
       assert {:ok, %User{}} = Admin.delete_user(user)
       assert_raise Ecto.NoResultsError, fn -> Admin.get_user!(user.id) end
     end
